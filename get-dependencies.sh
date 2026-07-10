@@ -6,7 +6,7 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-# pacman -Syu --noconfirm PACKAGESHERE
+pacman -Syu --noconfirm libnss_nis nss-mdns nss
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
@@ -15,12 +15,19 @@ get-debloated-pkgs --add-common --prefer-nano
 # Comment this out if you need an AUR package
 #make-aur-package PACKAGENAME
 
-# If the application needs to be manually built that has to be done down here
+echo "Getting binary..."
+echo "---------------------------------------------------------------"
+case "$ARCH" in
+	x86_64)  farch=x64;;
+	aarch64) farch=arm64;;
+esac
 
-# if you also have to make nightly releases check for DEVEL_RELEASE = 1
-#
-# if [ "${DEVEL_RELEASE-}" = 1 ]; then
-# 	nightly build steps
-# else
-# 	regular build steps
-# fi
+link=$(wget https://api.github.com/repos/stoatchat/for-desktop/releases -O - \
+	  | sed 's/[()",{} ]/\n/g' | grep -o -m 1 "https.*/Stoat-linux-$farch.*.zip")
+wget --retry-connrefused --tries=30 "$link" -O /tmp/temp.zip
+
+mkdir -p ./AppDir/bin
+unzip /tmp/temp.zip
+mv -v ./Stoat-linux-"$farch"/* ./AppDir/bin
+
+echo "$link" | awk -F'/' '{print $(NF-1); exit}' > ~/version
