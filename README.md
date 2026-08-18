@@ -2,6 +2,8 @@
 
 # Stoat-AppImage 🐧
 
+# ⚠️ [This AppImage is now available directly on Stoat](https://github.com/stoatchat/for-desktop) ⚠️
+
 [![GitHub Downloads](https://img.shields.io/github/downloads/pkgforge-dev/Stoat-AppImage/total?logo=github&label=GitHub%20Downloads)](https://github.com/pkgforge-dev/Stoat-AppImage/releases/latest)
 [![CI Build Status](https://github.com/pkgforge-dev/Stoat-AppImage/actions/workflows/appimage.yml/badge.svg)](https://github.com/pkgforge-dev/Stoat-AppImage/releases/latest)
 [![Latest Stable Release](https://img.shields.io/github/v/release/pkgforge-dev/Stoat-AppImage)](https://github.com/pkgforge-dev/Stoat-AppImage/releases/latest)
